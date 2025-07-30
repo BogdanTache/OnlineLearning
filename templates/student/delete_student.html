@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Delete {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <br><br>
+                <div class="card">
+                    <div class="card-header">Delete - {{ student }}</div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <p>Are you sure you want to delete {{ student }}?</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-outline-danger">Yes</button>
+                            <a href="{% url 'list-students' %}" class="btn btn-outline-secondary">No</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

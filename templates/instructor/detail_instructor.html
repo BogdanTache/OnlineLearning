@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Details {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <br><br>
+                <div class="card">
+                    <h5 class="card-header">More details</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ instructor.first_name }} {{ instructor.last_name }}</h5>
+                        <p class="card-text">Email: {{ instructor.email }}</p>
+                        <p class="card-text">Course: {{ instructor.course }}</p>
+                        <a href="{% url 'instructors_list' %}" class="btn btn-primary">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,155 @@
+<nav class="navbar navbar-expand-lg navbar-dark"
+     style="background: linear-gradient(135deg, rgba(102,126,234,1) 0%, rgba(118,75,162,1) 100%);">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">
+            <i class="fas fa-graduation-cap me-2"></i>Online Learning
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active hover-underline" aria-current="page" href="{% url 'home_page' %}">
+                        <i class="fas fa-home me-1"></i>Home
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        All courses
+                    </a>
+                    <ul class="dropdown-menu">
+
+                        {% for course in courses %}
+                            <li><a class="dropdown-item" href="{% url 'detalii_extra_course' course.id %}">{{ course.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle hover-underline" href="#"
+                           role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <i class="fas fa-chalkboard-teacher me-1"></i>Manage Courses
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="{% url 'course_form' %}"><i
+                                    class="fas fa-plus-circle me-2"></i>Create Course</a></li>
+                            <li><a class="dropdown-item" href="{% url 'course_list' %}"><i
+                                    class="fas fa-list me-2"></i>Courses List</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle hover-underline" href="#"
+                           role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <i class="fas fa-user-graduate me-1"></i>Student
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="{% url 'create_student' %}"><i
+                                    class="fas fa-plus-circle me-2"></i>Create Student</a></li>
+                            <li><a class="dropdown-item" href="{% url 'list_students' %}"><i
+                                    class="fas fa-list me-2"></i>Student List</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle hover-underline" href="{% url 'instructors_list' %}"
+                           role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <i class="fas fa-chalkboard-teacher me-1"></i>Instructor
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="{% url 'create_instructor' %}"><i
+                                    class="fas fa-plus-circle me-2"></i>Create Instructor</a></li>
+                            <li><a class="dropdown-item" href="{% url 'instructors_list' %}"><i
+                                    class="fas fa-list me-2"></i>Instructor List</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+
+            <div class="d-flex gap-2">
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}" class="d-flex">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-light hover-grow position-relative">
+                            <i class="fas fa-sign-out-alt me-1"></i>
+                            {{ user.username }}
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                !
+                            </span>
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-light hover-glow">
+                        <i class="fas fa-sign-in-alt me-1"></i>Login
+                    </a>
+                    <a href="{% url 'create_user' %}" class="btn btn-success hover-pulse">
+                        <i class="fas fa-user-plus me-1"></i>Sign Up
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+
+<style>
+    .hover-underline {
+        position: relative;
+    }
+
+    .hover-underline::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: white;
+        transition: width 0.3s ease;
+    }
+
+    .hover-underline:hover::after {
+        width: 100%;
+    }
+
+    .hover-grow {
+        transition: all 0.3s ease;
+    }
+
+    .hover-grow:hover {
+        transform: scale(1.05);
+    }
+
+    .hover-glow:hover {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .hover-pulse:hover {
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .dropdown-menu-dark {
+        background-color: rgba(51, 51, 51, 0.95);
+        border: none;
+    }
+
+    .dropdown-item:hover {
+        background-color: rgba(102, 126, 234, 0.5);
+    }
+</style>

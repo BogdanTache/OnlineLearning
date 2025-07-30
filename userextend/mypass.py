@@ -1,0 +1,1 @@
+parola_mea = 'bzgx neqt tirw ipun'

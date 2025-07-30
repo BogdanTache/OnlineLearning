@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %} Autentificare {% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f7f6f3;
+    }
+
+    .vertical-center-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+    }
+
+    .card {
+        border-radius: 0.75rem;
+    }
+
+    .card-header.decorative {
+        background: linear-gradient(135deg, #0d6efd, #0a58ca);
+        color: white;
+        border-bottom: 0;
+    }
+</style>
+
+<div class="vertical-center-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-5 offset-md-2 offset-lg-3">
+
+                <div class="card shadow-lg border-0">
+                    <div class="card-header decorative py-3">
+                        <h4 class="mb-0 text-center fw-normal">
+                            <i class="fas fa-sign-in-alt me-2"></i>AUTHENTICATION
+                        </h4>
+                    </div>
+                    <div class="card-body p-4 p-md-5">
+                        <form method="POST" novalidate>
+                            {% csrf_token %}
+
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {% for error in form.non_field_errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+                            <div class="form-floating mb-3">
+                                {{ form.username }}
+                                <label for="{{ form.username.id_for_label }}">UserName</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                {{ form.password }}
+                                <label for="{{ form.password.id_for_label }}">password</label>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center bg-light border-0 py-3">
+                        <p class="mb-0 text-muted">Don't have an account? <a href="{% url 'create_user' %}" class="fw-bold text-decoration-none">create account</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Details {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <br><br>
+                <div class="card">
+                    <h5 class="card-header">More details</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ student.first_name }} {{ student.last_name }}</h5>
+                        <p class="card-text">Email: {{ student.email }}</p>
+                        <p class="card-text">Age: {{ student.age }}</p>
+                        <a href="{% url 'list-students' %}" class="btn btn-primary">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

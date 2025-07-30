@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+
+        <div class="card-header bg-primary text-white">
+            <h2 class="card-title">{{ course.title }}</h2>
+        </div>
+
+        <div class="card-body">
+            <p class="card-text"><strong>Description:</strong> {{ course.description }}</p>
+            <p class="card-text"><strong>Star date:</strong> {{ course.start_date }} </p>
+            <p class="card-text"><strong>Instructor:</strong> {{ course.instructor.first_name}} {{course.instructor.last_name }}</p>
+            <p class="card-text"><strong>Price:</strong> {{ course.price }} EUR</p>
+        </div>
+
+        <div class="card-footer text-muted">
+            <a href="{% url 'home_page' %}" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
