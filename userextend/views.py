@@ -32,7 +32,7 @@ class UserCreateView(CreateView):
             new_user.first_name = new_user.first_name.upper()
             new_user.last_name = new_user.last_name.upper()
 
-            new_user.username = f'{new_user.first_name.lower()} {new_user.last_name.lower()}_{random.randint(100000,999999)}'
+            new_user.username = f'{new_user.first_name.lower()}{new_user.last_name.lower()}_{random.randint(100000,999999)}'
 
             new_user.save()
 

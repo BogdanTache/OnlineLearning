@@ -24,6 +24,7 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
+                            <th>Course Instructor</th>
                             <th>Status</th>
                             <th>Hire Date</th>
                             <th>Actions</th>
@@ -36,6 +37,7 @@
                                 <td>{{ instructor.first_name }}</td>
                                 <td>{{ instructor.last_name }}</td>
                                 <td><a href="mailto:{{ instructor.email }}">{{ instructor.email }}</a></td>
+                                <td>{{ instructor.course }}</td>
                                 <td>
                                 <span class="badge bg-{% if instructor.active %}success{% else %}danger{% endif %}">
                                     {% if instructor.active %}Active{% else %}Inactive{% endif %}
